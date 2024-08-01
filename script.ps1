@@ -1,24 +1,17 @@
-# Create a temporary directory
-$tempFolder = Join-Path $env:TEMP "WinGetInstall"
-New-Item -ItemType Directory -Force -Path $tempFolder
+# Set execution policy and security protocol
+Set-ExecutionPolicy Bypass -Scope Process -Force
+[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
 
-# Download the latest version of Winget
-$latestWingetMsixBundleUri = "https://aka.ms/getwinget"
-$latestWingetMsixBundle = Join-Path $tempFolder "Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
-Invoke-WebRequest -Uri $latestWingetMsixBundleUri -OutFile $latestWingetMsixBundle
+# Install Chocolatey silently
+iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 
-# Install Winget
-Add-AppxPackage -Path $latestWingetMsixBundle
+# Refresh environment variables
+refreshenv
 
-# Clean up
-Remove-Item $tempFolder -Recurse
+# Install packages silently
+choco install opera discord vlc foxitreader libreoffice-fresh 7zip -y
 
-pause
-winget install -e --id Opera.Opera Discord.Discord VideoLAN.VLC Foxit.FoxitReader TheDocumentFoundation.LibreOffice 7zip.7zip --accept-package-agreements --accept-source-agreements
-pause
+
 Install-Module PSWindowsUpdate -Force
-pause
 Get-WindowsUpdate
-pause
 Install-WindowsUpdate -AcceptAll
-pause
