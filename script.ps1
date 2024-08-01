@@ -13,7 +13,12 @@ Add-AppxPackage -Path $latestWingetMsixBundle
 # Clean up
 Remove-Item $tempFolder -Recurse
 
+pause
 winget install -e --id Opera.Opera Discord.Discord VideoLAN.VLC Foxit.FoxitReader TheDocumentFoundation.LibreOffice 7zip.7zip --accept-package-agreements --accept-source-agreements
+pause
 Install-Module PSWindowsUpdate -Force
+pause
 Get-WindowsUpdate
+pause
 Install-WindowsUpdate -AcceptAll
+pause
