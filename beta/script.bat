@@ -1,2 +1,0 @@
-ninite.exe 
-pause
