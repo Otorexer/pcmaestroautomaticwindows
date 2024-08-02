@@ -9,7 +9,7 @@ iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocola
 refreshenv
 
 # Install packages silently
-choco install opera discord vlc foxitreader libreoffice-fresh 7zip -y --ignore-checksums
+choco install opera discord vlc foxitreader libreoffice-fresh 7zip sdio -y --ignore-checksums
 
 
 Install-Module PSWindowsUpdate -Force
